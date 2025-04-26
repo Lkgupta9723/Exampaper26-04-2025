@@ -4,8 +4,8 @@ pipeline {
     environment {
         IMAGE_NAME = 'nodejsdocker01'
         IMAGE_TAG = 'latest'
-        DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'  
-        DOCKERHUB_USERNAME = 'lakshya9723'     
+        DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
+        DOCKERHUB_USERNAME = 'lakshya9723'
     }
 
     stages {
@@ -17,17 +17,13 @@ pipeline {
 
         stage('Install Node.js Dependencies') {
             steps {
-                dir('blogWebsite-main') {
-                    bat 'npm install'
-                }
+                bat 'npm install'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('blogWebsite-main') {
-                    bat "docker build -t %DOCKERHUB_USERNAME%/%IMAGE_NAME%:%IMAGE_TAG% ."
-                }
+                bat "docker build -t %DOCKERHUB_USERNAME%/%IMAGE_NAME%:%IMAGE_TAG% ."
             }
         }
 
